@@ -2,23 +2,21 @@ name: Rails
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
-  run-lint:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
-          bundler-cache: true
+          ruby-version: 2.6
       - name: Install dependencies
-        run: |
-          bundle install
+        run: bundle install
       - name: Run tests
-        run: |
-          bundle exec rspec
+        run: bundle exec rspec
